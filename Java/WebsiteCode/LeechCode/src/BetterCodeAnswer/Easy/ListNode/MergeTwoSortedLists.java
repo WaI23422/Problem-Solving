@@ -1,41 +1,6 @@
-package BetterCodeAnswer.Easy.Arrays;
+package BetterCodeAnswer.Easy.ListNode;
 
-import java.util.ArrayList;
-
-class ListNode {
-    int val;
-    ListNode next;
-    ListNode() {}
-    ListNode(int val) { this.val = val; }
-    ListNode(int val, ListNode next) { this.val = val; this.next = next; }
-
-    public ListNode addNode(int[] listAdd, int pos) {
-        if (pos == listAdd.length-1) {
-            return new ListNode(listAdd[pos]);
-        }
-
-        return new ListNode(listAdd[pos],addNode(listAdd, pos+1));
-    }
-
-    public String toStr() {
-        ArrayList<Integer> listNode = new ArrayList<>();
-        listNode.add(this.val);
-
-        if (next != null) {
-            ListNode node = this.next;
-            while (true) {
-                listNode.add(node.val);
-                if ( node.next != null) {
-                    node = node.next;
-                } else {
-                    break;
-                }
-            }
-        }
-
-        return listNode.toString(); 
-    }
-}
+import BetterCodeAnswer.Easy.ListNode.Class.ListNode;
 
 /**
  * <a class="mr-2 text-label-1 dark:text-dark-label-1 hover:text-label-1 dark:hover:text-dark-label-1 text-lg font-medium" href="/problems/merge-two-sorted-lists/">21.Merge Two Sorted Lists</a>
@@ -89,25 +54,25 @@ public class MergeTwoSortedLists {
             ListNode list1 , list2;
 
             if (Lists[0].length != 0 && Lists[1].length != 0) {
-                list1 = new ListNode().addNode(Lists[0], 0);
-                list2 = new ListNode().addNode(Lists[1], 0);
+                list1 =  ListNode.addNode(Lists[0]);
+                list2 =  ListNode.addNode(Lists[1]);
             } else {
                 if (Lists[0].length == 0 && Lists[1].length == 0) {
                     list1 = null;
                     list2 = null;
                 } else if (Lists[1].length == 0) {
-                    list1 = new ListNode().addNode(Lists[0], 0);
+                    list1 =  ListNode.addNode(Lists[0]);
                     list2 = null;
                 } else {
                     list1 = null;
-                    list2 = new ListNode().addNode(Lists[1], 0);
+                    list2 =  ListNode.addNode(Lists[1]);
                 }
             }
 
             if (new MergeTwoSortedLists_Solution().mergeTwoLists(list1, list2) == null) {
                 System.out.println(new MergeTwoSortedLists_Solution().mergeTwoLists(list1, list2));
             } else {
-                System.out.println(new MergeTwoSortedLists_Solution().mergeTwoLists(list1, list2).toStr());
+                System.out.println(new MergeTwoSortedLists_Solution().mergeTwoLists(list1, list2).toString());
             }
 
         }
