@@ -1,7 +1,6 @@
-package Easy.Arrays;
+package BetterCodeAnswer.Easy.Arrays;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 /**
  * <a class="no-underline hover:text-blue-s dark:hover:text-dark-blue-s truncate cursor-text whitespace-normal hover:!text-[inherit]" href="/problems/intersection-of-two-arrays-ii/">350. Intersection of Two Arrays II</a>
@@ -46,33 +45,23 @@ public class IntersectionOfTwoArraysII {
     }
 }
 
-// 1 ms 42.9 MB
+// 0 ms 43.2 MB
 class IntersectionOfTwoArraysII_Solution {
     public int[] intersect(int[] nums1, int[] nums2) {
-        int[] store = new int[1_001];
-        
-        for (int i = 0; i < nums1.length; i++) {
-            store[nums1[i]]++;
+        int arr[] = new int[1001];
+        int result[] = new int[1001];
+        for(int a : nums1){
+            arr[a]++;
         }
-        
-        List<Integer> ans = new ArrayList<>();
 
-        for (int i = 0; i < nums2.length; i++) {
-            if (store[nums2[i]]-- > 0) {
-                ans.add(nums2[i]);
+        int index =0;
+        for(int a : nums2){
+            if(arr[a]!=0){
+                result[index++]=a;
+                arr[a]--;
             }
         }
 
-        return toIntegerArray(ans);
-    }
-
-    private int[] toIntegerArray(List<Integer> arr) {
-        int[] ans = new int[arr.size()];
-
-        for (int i = 0; i < ans.length; i++) {
-            ans[i] = arr.get(i);
-        }
-
-        return ans;
+        return Arrays.copyOf(result, index);
     }
 }
