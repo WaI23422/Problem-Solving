@@ -1,0 +1,17 @@
+# vscode
+.vscode/
+
+#Folder
+Test/
+bin/
+Java/Problem/src/HomeWork/
+Calculator/
+Latex/
+
+#File:
+code_test.py
+Test.java
+test.drawio
+ConvertBracket.java
+RemoveSpace.java
+Rename.java
