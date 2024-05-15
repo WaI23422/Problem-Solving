@@ -86,7 +86,7 @@ public class FindTheSafestPathInAGrid {
     }
 }
 
-//76 ms 78 MB
+// 76 ms 78 MB
 class FindTheSafestPathInAGrid_Solution {
     public int maximumSafenessFactor(List<List<Integer>> grid) {
         int n=grid.size();
