@@ -34,7 +34,8 @@ package Easy.String;
 public class LongestPalindrome {
     public static void main(String[] args) {
         String[] tests = {
-            "abccccdd"
+            "abccccdd",
+            "civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasafinalrestingplaceforthosewhoheregavetheirlivesthatthatnationmightliveItisaltogetherfangandproperthatweshoulddothisButinalargersensewecannotdedicatewecannotconsecratewecannothallowthisgroundThebravelmenlivinganddeadwhostruggledherehaveconsecrateditfaraboveourpoorponwertoaddordetractTgheworldadswfilllittlenotlenorlongrememberwhatwesayherebutitcanneverforgetwhattheydidhereItisforusthelivingrathertobededicatedheretotheulnfinishedworkwhichtheywhofoughtherehavethusfarsonoblyadvancedItisratherforustobeherededicatedtothegreattdafskremainingbeforeusthatfromthesehonoreddeadwetakeincreaseddevotiontothatcauseforwhichtheygavethelastpfullmeasureofdevotionthatweherehighlyresolvethatthesedeadshallnothavediedinvainthatthisnationunsderGodshallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeopleshallnotperishfromtheearth"
         };
     
         for (String s : tests) {
@@ -43,8 +44,32 @@ public class LongestPalindrome {
     }
 }
 
-// 1 ms 41.9 MB
+// 1 ms 41.3 MB
 class LongestPalindrome_Solution {
+    public int longestPalindrome(String s) {
+        int letterNumbers[] = new int[58],
+            odd = 0,
+            longest = 0;
+
+        for (char c : s.toCharArray()) {
+            letterNumbers[c-'A']++;
+        }
+
+        for (int letterNum : letterNumbers) {
+            if (letterNum % 2 == 0) {
+                longest += letterNum;
+            } else {
+                longest += letterNum-1;
+                odd = 1;
+            }
+        }
+
+        return longest + odd;
+    }
+}
+
+// 1 ms 41.9 MB
+class LongestPalindrome_Solution1 {
     public int longestPalindrome(String s) {
         char[] charFrequency = new char[128];
         int oddCount = 0;
