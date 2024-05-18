@@ -54,33 +54,12 @@ public class FizzBuzz {
 }
 
 // 1 ms 44.9 MB
-class FizzBuzz_Solution1 {
-    public List<String> fizzBuzz(int n) {
-        List<String> ans = new ArrayList<String>();
-
-        for (int i = 1; i < n+1; i++) {
-            if (i%15==0) { //i%3 == 0 && i%5 == 0
-                ans.add("FizzBuzz");
-            } else if (i%3 == 0) {
-                ans.add("Fizz");
-            } else if (i%5 == 0) {
-                ans.add("Buzz");
-            } else {
-                ans.add(i+"");
-            }
-        }
-
-        return ans;
-    }
-}
-
-
 class FizzBuzz_Solution {
     public List<String> fizzBuzz(int n) {
         List<String> ans = new ArrayList<String>();
 
         for (int i = 1; i < n+1; i++) {
-            if (i%15 == 0) {
+            if (i%15==0) { //i%3 == 0 && i%5 == 0
                 ans.add("FizzBuzz");
             } else if (i%3 == 0) {
                 ans.add("Fizz");
