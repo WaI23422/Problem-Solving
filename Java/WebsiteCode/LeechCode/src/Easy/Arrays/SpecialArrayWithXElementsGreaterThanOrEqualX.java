@@ -19,11 +19,10 @@ class SpecialArrayWithXElementsGreaterThanOrEqualX_Solution {
         
         Sort(nums,0,n-1);
         
-        if (nums[0] >= n) return n;
-        
-        for (int i = 1; i <= n; i++) {
-            if (nums[n - i] >= i && (n - i - 1 < 0 || nums[n - i - 1] < i)) {
-                return i;
+        for (int i = 0; i < n; i++) {
+            if (n == 0) {continue;}
+            if (n-i <= nums[i] && (i-1<0 || nums[i - 1] < n-i)) {
+                return n-i;
             }
         }
         
