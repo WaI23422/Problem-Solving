@@ -1,6 +1,6 @@
 def find_line_equation(x,y):
     x1,x2 = x
-    y1,y1 = y
+    y1,y2 = y
     
     m = (y2-y1)/(x2-x1)
 
