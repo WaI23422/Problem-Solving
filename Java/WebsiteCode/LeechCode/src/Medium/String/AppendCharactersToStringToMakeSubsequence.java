@@ -60,7 +60,25 @@ public class AppendCharactersToStringToMakeSubsequence {
     }
 }
 
+// 4 ms 45.1 MB
 class AppendCharactersToStringToMakeSubsequence_Solution {
+    public int appendCharacters(String s, String t) {
+        int subHave = 0,
+            tLen = t.length(),
+            previousIdx = -1;
+
+        for (int i = 0; i < tLen; i++) {
+            previousIdx = s.indexOf(t.charAt(i), previousIdx+1);
+            if (previousIdx == -1) {break;}
+            subHave++;
+        }
+
+        return tLen - subHave;
+    }
+}
+
+// 7 ms 45.6 MB
+class AppendCharactersToStringToMakeSubsequence_Solution2 {
     public int appendCharacters(String s, String t) {
         int first = 0, longestPrefix = 0;
 
