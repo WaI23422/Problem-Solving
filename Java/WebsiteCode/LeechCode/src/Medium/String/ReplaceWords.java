@@ -2,7 +2,9 @@ package Medium.String;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * <a class="no-underline hover:text-blue-s dark:hover:text-dark-blue-s truncate cursor-text whitespace-normal hover:!text-[inherit]" href="/problems/replace-words/">648. Replace Words</a>
@@ -87,34 +89,28 @@ class ReplaceWords_Solution {
     }
 }
 
-// 43 ms 53.2 MB
+// 699 ms 53.1 MB
 class ReplaceWords_Solution2 {
+
     public String replaceWords(List<String> dictionary, String sentence) {
-        
-        String[] a = sentence.split(" ");
-        StringBuilder sb = new StringBuilder("");
-        for (String i: a) {
-            List<String> dict = new ArrayList<>();
-            for (String t: dictionary) {
-                if(i.startsWith(t)) {
-                    i = t;
-                    dict.add(t);
-                }
-            }
-            if(dict.size() > 1) {
-                int len = 1000;
-                String ans = "";
-                for (String z : dict) {
-                    if(z.length() < len) {
-                        ans = z;
-                        len = z.length();
-                    }
-                }
-                sb.append(ans + " ");
-            } else {
-                sb.append(i + " ");
+        String[] wordArray = sentence.split(" ");
+        Set<String> dictSet = new HashSet<>(dictionary);
+
+        for (int i = 0; i < wordArray.length; i++) {
+            wordArray[i] = shortestRoot(wordArray[i], dictSet);
+        }
+
+        return String.join(" ", wordArray);
+    }
+
+    private String shortestRoot(String word, Set<String> dictSet) {
+        for (int i = 1; i <= word.length(); i++) {
+            String root = word.substring(0, i);
+            if (dictSet.contains(root)) {
+                return root;
             }
         }
-        return sb.toString().trim();
+        
+        return word;
     }
 }
