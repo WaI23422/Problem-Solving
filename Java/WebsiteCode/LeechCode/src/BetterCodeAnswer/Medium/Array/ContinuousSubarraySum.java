@@ -100,6 +100,29 @@ class ContinuousSubarraySum_Solution {
 }
 
 // 3 ms 60.3 MB
+/**
+ * <h1 id="approach">Approach</h1>
+ * <ol>
+ *<li>Prefix Sums and Edge Case Checks:</li>
+ *</ol>
+ *<ul>
+ *<li>The code iterates through the array, keeping track of a running sum using nums[i] += nums[i-1]. This creates a prefix sum array where nums[i] represents the sum of elements from index 0 to i.</li>
+ *<li>It performs two quick checks for edge cases:
+ *<ul>
+ *<li>If both nums[i] and nums[i-1] are 0, it implies a subarray with all zeros, which is always a multiple of any k. So, it returns true in this case.</li>
+ *<li>If the current sum nums[i] is directly divisible by k, it indicates a good subarray (its sum is a multiple of k). The code returns true here as well.</li>
+ *</ul>
+ *</li>
+ *</ul>
+ *<ol start="2">
+ *<li>Iterative Comparison:</li>
+ *</ol>
+ *<ul>
+ *<li>For each element nums[i], the code iterates backward (j = i; j &gt; 1; j--) to compare it with previous subarrays.</li>
+ *<li>It calculates the difference between the current sum (nums[i]) and the sum up to a previous index (j-2) using (nums[i] - nums[j-2]).</li>
+ *<li>If this difference is a multiple of k, it means we've found a good subarray. The code checks for this by comparing the remainder when this difference is divided by k. If the remainder is 0, it returns true.</li>
+ *</ul>
+ */
 class ContinuousSubarraySum_Solution2 {
     public boolean checkSubarraySum(int[] nums, int k) {
         if(nums[0] == 300000){
