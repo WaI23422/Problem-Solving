@@ -1,4 +1,7 @@
-package Easy.Number;
+package BetterCodeAnswer.Easy.Number;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a class="no-underline hover:text-blue-s dark:hover:text-dark-blue-s truncate cursor-text whitespace-normal hover:!text-[inherit]" href="/problems/base-7/">504. Base 7</a>
@@ -34,51 +37,45 @@ public class BaseSeven {
     }
 }
 
-// 1 ms 40.6 MB
+// 1 ms 41.53 MB
 class BaseSeven_Solution {
-    // 0 ms 40.6 MB
-    // public String convertToBase7(int num) {
-        // return Integer.toString(num, 7);
-    // }
-
-    StringBuffer base_7 = new StringBuffer();
-    
     public String convertToBase7(int num) {
-        if (num < 0) {
-            num = -num;
-            base_7.append("-");
-        }
-
-        timesDivivedBy7(num, 0);
-
-        return base_7.toString();
-    }
-
-    private void timesDivivedBy7(int num, int prev) {
-        int copNum = num,
-            total = 0;
-        while (copNum > 6) {
-            copNum /= 7;
-            total++;
-        }
-
-        addZero(total,prev);
-        base_7.append(copNum);
-
-        num -= copNum*Math.pow(7, total);
-
-        if (num != 0) {
-            timesDivivedBy7(num, total);
-        } else {
-            if (total > 0) {
-                addZero(0, total+1);
+        if (num < 0)
+            return "-" + convertToBase7(-num);
+        else if (num == 0)
+            return "0";
+        List<Character> chars = new ArrayList<>();
+        while (num > 0) {
+            int q = num % 7;
+            if (q == 0)
+                chars.add('0');
+            while (q > 0) {
+                chars.add((char) ((q % 10) + '0'));
+                q /= 10;
             }
+            num /= 7;
         }
+        char[] str = new char[chars.size()];
+        for(int i = 0; i < chars.size(); i++){
+            str[i] = chars.get(chars.size() - 1 - i);
+        }
+        return new String(str);
     }
+}
 
-    private void addZero(int start, int end) {
-        for (int i = start; i < end-1; i++) {
-            base_7.append("0");
+// 2 ms 40.7 MB
+class BaseSeven_Solution2 {
+    public String convertToBase7(int num) {
+        if (num == 0)
+            return "0";
+        StringBuilder res = new StringBuilder("");
+        int temp = Math.abs(num);
+        while (temp != 0) {
+            int remainder = temp % 7;
+            temp = temp / 7;
+            res.append(String.valueOf(remainder));
         }
+        
+        return num < 0 ? "-" + res.reverse().toString() : res.reverse().toString();
     }
 }
