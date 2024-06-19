@@ -121,3 +121,113 @@ class MinimumNumberOfDaysToMakeMBouquets_Solution {
         return minDays;
     }
 }
+
+// 11 ms 58.4 MB
+class MinimumNumberOfDaysToMakeMBouquets_Solution2 {
+   
+    int arr[];
+    int m,k;
+    public int minDays(int[] arr, int m, int k) {
+    //    System.out.println(""+(m*k)+" "+arr.length);
+        if(m*k<0 || m*k>arr.length)
+        return -1;
+
+        this.m = m;
+        this.k = k;
+
+        this.arr = arr;
+
+        int max=arr[0];
+
+        for(int i=1;i<arr.length;i++)
+            max = Math.max(max, arr[i]);
+
+        int st=1,en=max,md;
+
+        while(st<=en) {
+            md = (st+en)/2;
+           // System.out.println(""+st+" "+en+" "+count(md));
+            if(count(md)) {
+                en = md-1;
+            }
+            else
+            st = md+1;
+        }
+
+        return st;
+    }
+
+    boolean count(int val) {
+
+        int temp=0,temp2=0;
+
+        for(int i=0;i<arr.length;i++) {
+            if(arr[i]<=val) {
+                temp++;
+                if(temp==k)
+                {
+                    temp=0;
+                    temp2++;
+                    if(temp2==m)
+                    return true;
+                }
+            }
+            else
+            {
+                if((arr.length-i)/k<m-temp2)
+                return false;
+                temp=0;
+            }
+
+        }
+        return false;
+
+    }
+}
+
+// 15 ms 58.4 MB
+class MinimumNumberOfDaysToMakeMBouquets_Solution3 {
+
+    public int minDays(int[] bloomDay, int m, int k) {
+        if ((long) m * k > bloomDay.length) {
+            return -1;
+        }
+
+        int low = 1, high = (int) 1e9;
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+
+            if (isPossibleBouquets(bloomDay, m, k, mid)) {
+                high = mid;
+            } else {
+                low = mid + 1;
+            }
+        };
+
+        return low;
+    }
+
+    private boolean isPossibleBouquets(int[] bloomDay, int m, int k, int day) {
+        int total = 0;
+
+        for (int i = 0; i < bloomDay.length; i++) {
+            int count = 0;
+            while (i < bloomDay.length && count < k && bloomDay[i] <= day) {
+                count++;
+                i++;
+            }
+
+            if (count == k) {
+                total++;
+                i--;
+            }
+
+            if (total >= m) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+}
