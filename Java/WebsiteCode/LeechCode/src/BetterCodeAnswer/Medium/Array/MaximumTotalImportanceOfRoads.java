@@ -124,8 +124,9 @@ class MaximumTotalImportanceOfRoads_Solution2 {
         long sum = 0;
         long count=1;
         for(int i=0;i<n;i++){
-            for(int j=0;j<arr[i];j++)
-            sum += i*count++;
+            for(int j=0;j<arr[i];j++){
+                sum += i*count++;
+            }
         }
         return sum;
     }
