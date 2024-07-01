@@ -3,7 +3,7 @@
 --     name VARCHAR,
 --     salary VARCHAR,
 --     manageID INT
--- )
+-- );
 
 -- 339 ms 0B
 SELECT e.name as Employee
