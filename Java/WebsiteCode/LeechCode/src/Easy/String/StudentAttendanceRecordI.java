@@ -59,6 +59,7 @@ public class StudentAttendanceRecordI {
     }
 }
 
+// 0 ms 41.2 MB
 class StudentAttendanceRecordI_Solution {
     public boolean checkRecord(String s) {
         int late = 0,
