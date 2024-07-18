@@ -101,34 +101,46 @@ class NumberOfGoodLeafNodesPairs_Solution {
 
 // 2ms 44.69MB
 class NumberOfGoodLeafNodesPairs_Solution2 {
-    int result = 0;
+
     public int countPairs(TreeNode root, int distance) {
-        dfs(root,distance);
-        return result;
+        return postOrder(root, distance)[11];
     }
-    
-    int[] dfs(TreeNode root,int distance){
-        if(root == null)
-            return new int[distance+1];
-        if(root.left == null && root.right == null){
-            int res[] = new int[distance+1];
-            res[1]++;
-            return res;
+
+    private int[] postOrder(TreeNode currentNode, int distance) {
+        if (currentNode == null) return new int[12];
+        else if (currentNode.left == null && currentNode.right == null) {
+            int[] current = new int[12];
+            // Leaf node's distance from itself is 0
+            current[0] = 1;
+            return current;
         }
-        int[] left = dfs(root.left,distance);
-        int[] right = dfs(root.right,distance);
-        for(int l=1;l<left.length;l++){
-            for(int r = distance-1;r>=0;r--){
-                if(l+r <=distance)
-                result += left[l]*right[r];
+
+        // Leaf node count for a given distance i
+        int[] left = postOrder(currentNode.left, distance);
+        int[] right = postOrder(currentNode.right, distance);
+
+        int[] current = new int[12];
+
+        // Combine the counts from the left and right subtree and shift by
+        // +1 distance
+        for (int i = 0; i < 10; i++) {
+            current[i + 1] += left[i] + right[i];
+        }
+
+        // Initialize to total number of good leaf nodes pairs from left and right subtrees.
+        current[11] += left[11] + right[11];
+
+        // Iterate through possible leaf node distance pairs
+        for (int d1 = 0; d1 <= distance; d1++) {
+            for (int d2 = 0; d2 <= distance; d2++) {
+                if (2 + d1 + d2 <= distance) {
+                    // If the total path distance is less than the given distance limit,
+                    // then add to the total number of good pairs
+                    current[11] += left[d1] * right[d2];
+                }
             }
         }
-        int res[] = new int[distance+1];
-        //shift by 1
-        for(int i=res.length-2;i>=1;i--){
-            res[i+1] = left[i]+right[i];
-        }
-        
-        return res;
+
+        return current;
     }
 }
