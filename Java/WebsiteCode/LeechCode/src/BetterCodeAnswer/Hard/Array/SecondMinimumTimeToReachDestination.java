@@ -157,7 +157,7 @@ class SecondMinimumTimeToReachDestination_Solution {
 }
 
 // 37ms 56.5MB
-class Solution {
+class SecondMinimumTimeToReachDestination_Solution2 {
     @SuppressWarnings("unchecked")
     public int secondMinimum(int n, int[][] edges, int time, int change) {
         /**
