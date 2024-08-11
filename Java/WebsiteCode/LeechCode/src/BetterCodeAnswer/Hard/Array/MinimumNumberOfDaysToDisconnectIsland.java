@@ -329,7 +329,7 @@ class MinimumNumberOfDaysToDisconnectIsland_Solution3 {
                     if(found)
                         return 0;
                     found=true;
-                    art(i,j,grid,-100,-100);
+                    art(i,j,grid,-1,-1);
                 }
             }
         }
@@ -361,14 +361,14 @@ class MinimumNumberOfDaysToDisconnectIsland_Solution3 {
                 child++;
                 art(x,y,grid,row,col);
                 low[row][col]=Math.min(low[row][col],low[x][y]);
-                if(low[x][y]>=vis[row][col] && (parRow!=-100 && parCol!=-100))
+                if(low[x][y]>=vis[row][col] && (parRow!=-1 && parCol!=-1))
                     arti=true;
             }else{
                 low[row][col]=Math.min(low[row][col],vis[x][y]);
             }
         }
 
-        if(parRow==-100 && parCol==-100 && child>1)
+        if(parRow==-1 && parCol==-1 && child>1)
             arti=true;
     }
 }
