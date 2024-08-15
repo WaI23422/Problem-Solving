@@ -71,11 +71,13 @@ class FindKthSmallestPairDistance_Solution2  {
             int mid=(s+e)/2;
             int cnt=0;
             int j=1;
+            
             for(int i=0;i<nums.length;i++){
                 while(j<nums.length&&nums[j]-nums[i]<=mid) j++;
                 cnt+=j-i-1;
             }
-            if(cnt<k) s=mid+1;
+
+            if (cnt<k) s=mid+1;
             else e=mid;
         }
         return s;
