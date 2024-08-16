@@ -42,16 +42,16 @@ public class MaximumDistanceInArrays {
 // 5ms 68.3 MB
 class MaximumDistanceInArrays_Solution {
     public int maxDistance(List<List<Integer>> arrays) {
-        int min = Integer.MAX_VALUE;
-        int minIdx = -1;
-        int secMin = min;
-        int max = Integer.MIN_VALUE;
-        int maxIdx = -1;
-        int secMax = max;
+        int min = Integer.MAX_VALUE,
+            minIdx = -1,
+            secMin = min,
+            max = Integer.MIN_VALUE,
+            maxIdx = -1,
+            secMax = max;
         for (int i = 0; i < arrays.size(); i++) {
             List<Integer> arr = arrays.get(i);
-            int curMin = arr.get(0);
-            int curMax = arr.get(arr.size() - 1);
+            int curMin = arr.getFirst();
+            int curMax = arr.getLast();
             if (min > curMin) {
                 secMin = min;
                 min = curMin;
