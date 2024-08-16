@@ -39,7 +39,7 @@ public class MaximumDistanceInArrays {
     }
 }
 
-// 5ms 68.3 MB
+// 5ms 68.3 MB -> 4ms 64.85MB
 class MaximumDistanceInArrays_Solution {
     public int maxDistance(List<List<Integer>> arrays) {
         int min = Integer.MAX_VALUE,
