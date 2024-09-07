@@ -73,7 +73,7 @@ class LinkedListInBinaryTree_Solution2 {
     }
 }
 
-// 1ms 45.20MB
+// 1ms 45.20MB Knuth-Morris-Pratt (KMP) Algorithm
 class LinkedListInBinaryTree_Solution3 {
 
     public boolean isSubPath(ListNode head, TreeNode root) {
