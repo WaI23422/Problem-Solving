@@ -1,8 +1,8 @@
 package BetterCodeAnswer.Medium.Array;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.ArrayList;
 
 /**
  * <a class="no-underline hover:text-blue-s dark:hover:text-dark-blue-s truncate cursor-text whitespace-normal hover:!text-[inherit]" href="/problems/xor-queries-of-a-subarray/">1310. XOR Queries of a Subarray</a>
