@@ -58,14 +58,14 @@ public class FindTheLongestSubstringContainingVowelsInEvenCounts {
  * <p>Observe that we don't need to know the exact count of the vowels to solve this problem; we only need to know the parity of each vowel (whether it appears an even or odd number of times). The parity of each vowel can be stored in a boolean or bit, where <code>0</code> means even and <code>1</code> means odd. We need five bits to track the parity of all five vowels (a, e, i, o, u), resulting in 2^5 = 32 possible states.</p>
  * <p>We can assign the first bit to <code>a</code>, the second to <code>e</code>, and so on. The state of the vowels can be represented as a binary string. For instance, <code>00000</code> means all vowels have even counts, while <code>10000</code> means only <code>a</code> has an odd count.<br>
  * By converting these binary states to integers, we can assign values to the vowels: <code>a = 1</code>, <code>e = 2</code>, <code>i = 4</code>, <code>o = 8</code>, and <code>u = 16</code>. If both <code>a</code> and <code>i</code> have odd counts, their total value would be <code>1 + 4 = 5</code>. A total value of <code>0</code> means all vowels have even counts.</p>
- * <p><img src="../Figures/1371/slide1.drawio.png" alt="fig"></p>
+ * <p><img src="https://leetcode.com/problems/find-the-longest-substring-containing-vowels-in-even-counts/Figures/1371/image2.drawio.png" alt="fig"></p>
  * <p>To find substrings with even vowels, we can use the XOR operator to update and track the parity of the vowels. If a vowel appears an even number of times, the result of XOR will be 0; if it appears an odd number of times, the result will be 1.</p>
  * <p>We compute a running XOR for each vowel as we traverse the string. To check for substrings with even vowels, we consider two cases:</p>
  * <ol>
  * <li>If the current XOR value is <code>00000</code> (i.e., all vowels have even counts), the substring from the start of the string to the current position contains even vowels.</li>
  * <li>If the current XOR value has occurred before, the substring between the first occurrence of that XOR value and the current position also contains even vowels.</li>
  * </ol>
- * <p><img src="../Figures/1371/image2.drawio.png" alt="fig"></p>
+ * <p><img src="https://leetcode.com/problems/find-the-longest-substring-containing-vowels-in-even-counts/Figures/1371/slide1.drawio.png" alt="fig"></p>
  * <h4 id="algorithm">Algorithm</h4>
  * <ol>
  * <li>Initialize an integer variable <code>prefixXOR</code> and set it to 0.</li>
