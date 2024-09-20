@@ -72,3 +72,93 @@ class ShortestPalindrome_Solution {
             .toString();
     }
 }
+
+// 225ms 45.15MB
+class ShortestPalindrome_Solution2 {
+
+    public String shortestPalindrome(String s) {
+        int length = s.length();
+        String reversedString = new StringBuilder(s).reverse().toString();
+
+        // Iterate through the string to find the longest palindromic prefix
+        for (int i = 0; i < length; i++) {
+            if (
+                s.substring(0, length - i).equals(reversedString.substring(i))
+            ) {
+                return new StringBuilder(reversedString.substring(0, i))
+                    .append(s)
+                    .toString();
+            }
+        }
+        return "";
+    }
+}
+
+// 6ms 44.54MB
+class ShortestPalindrome_Solution3 {
+
+    public String shortestPalindrome(String s) {
+        long hashBase = 29;
+        long modValue = (long) 1e9 + 7;
+        long forwardHash = 0, reverseHash = 0, powerValue = 1;
+        int palindromeEndIndex = -1;
+
+        // Calculate rolling hashes and find the longest palindromic prefix
+        for (int i = 0; i < s.length(); i++) {
+            char currentChar = s.charAt(i);
+
+            // Update forward hash
+            forwardHash = (forwardHash * hashBase + (currentChar - 'a' + 1)) %
+            modValue;
+
+            // Update reverse hash
+            reverseHash = (reverseHash + (currentChar - 'a' + 1) * powerValue) %
+            modValue;
+            powerValue = (powerValue * hashBase) % modValue;
+
+            // If forward and reverse hashes match, update palindrome end index
+            if (forwardHash == reverseHash) {
+                palindromeEndIndex = i;
+            }
+        }
+
+        // Find the remaining suffix after the longest palindromic prefix
+        String suffix = s.substring(palindromeEndIndex + 1);
+        // Reverse the remaining suffix
+        StringBuilder reversedSuffix = new StringBuilder(suffix).reverse();
+
+        // Prepend the reversed suffix to the original string and return the result
+        return reversedSuffix.append(s).toString();
+    }
+}
+
+// 8ms 44.78MB - KMP algorithm
+class ShortestPalindrome_Solution4 {
+
+    public String shortestPalindrome(String s) {
+        String reversedString = new StringBuilder(s).reverse().toString();
+        String combinedString = s + "#" + reversedString;
+        int[] prefixTable = buildPrefixTable(combinedString);
+
+        int palindromeLength = prefixTable[combinedString.length() - 1];
+        StringBuilder suffix = new StringBuilder(
+            s.substring(palindromeLength)
+        ).reverse();
+        return suffix.append(s).toString();
+    }
+
+    private int[] buildPrefixTable(String s) {
+        int[] prefixTable = new int[s.length()];
+        int length = 0;
+        for (int i = 1; i < s.length(); i++) {
+            while (length > 0 && s.charAt(i) != s.charAt(length)) {
+                length = prefixTable[length - 1];
+            }
+            if (s.charAt(i) == s.charAt(length)) {
+                length++;
+            }
+            prefixTable[i] = length;
+        }
+        return prefixTable;
+    }
+}
